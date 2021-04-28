@@ -1,41 +1,41 @@
 all:
-    project_dir: "/home/danielsg/16S_QIIME2/test"
+    project_dir: "/scr1/users/danielsg/davis_run_3_16s/Data"
     mux_dir: "multiplexed_fastq"
-    mapping: "test_mapping_file.tsv"
-    admin_email: "danielsg@email.chop.edu"
+    mapping: "Davis_run_3_mapping_file.tsv"
+    admin_email: "danielsg@chop.edu"
 
 #try revcomp if you are getting 0 reads when demultiplexing
 demux:
     mismatch: 0
-    revcomp: false
+    revcomp: true
 
 denoise:
     trim_left_f: 0
-    trunc_len_f: 240
+    trunc_len_f: 300
     trim_left_r: 0
-    trunc_len_r: 240
-    n_threads: 6
+    trunc_len_r: 300
+    n_threads: 8
 
 taxonomy:
-    classifier_fp: "/home/danielsg/16S_QIIME2/QIIME2_data/gg-13-8-99-nb-classifier.qza"
+    classifier_fp: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/QIIME2_data/gg-13-8-99-nb-classifier.qza"
 
 diversity:
     sampling_depth: 30
 
 unassign:
-    unassigner_species_fp: "/home/danielsg/16S_QIIME2/unassign_data/unassigner_species.fasta"
+    unassigner_species_fp: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/unassign_data/unassigner_species.fasta"
 
 report:
-    study_group_var: "investigator"
+    study_group_var: "comparison"
     min_reads: 5
     richness_subsample_size: 20
-    rmd: "/home/danielsg/16S_QIIME2/scripts/Basic_Bioinformatics_Report.Rmd"
-    R_helper: "/home/danielsg/16S_QIIME2/scripts/helper_functions.R"
-    report_rdata: "/home/danielsg/16S_QIIME2/test/report.RData" # rmd can only have one output so have to put this here
+    rmd: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/scripts/Basic_Bioinformatics_Report.Rmd"
+    R_helper: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/scripts/helper_functions.R"
+    report_rdata: "/scr1/users/danielsg/davis_run_3_16s/Data/report.RData" # rmd can only have one output so have to put this here
 
 dada2:
-    rscript: "/home/danielsg/16S_QIIME2/scripts/dada2.R"
-    species_training_set: "/home/danielsg/16S_QIIME2/dada2_data/rdp_species_assignment_16.fa.gz"
+    rscript: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/scripts/dada2.R"
+    species_training_set: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/dada2_data/rdp_species_assignment_16.fa.gz"
 
 vsearch:
     db: "/mnt/isilon/microbiome/analysis/biodata/green_genes/current_gg16S.fasta"
