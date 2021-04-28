@@ -2,7 +2,7 @@ all:
     project_dir: "/scr1/users/danielsg/davis_run_3_16s/Data"
     mux_dir: "multiplexed_fastq"
     mapping: "Davis_run_3_mapping_file.tsv"
-    admin_email: "danielsg@chop.edu"
+    admin_email: ""
 
 #try revcomp if you are getting 0 reads when demultiplexing
 demux:
@@ -11,9 +11,9 @@ demux:
 
 denoise:
     trim_left_f: 0
-    trunc_len_f: 300
+    trunc_len_f: 230
     trim_left_r: 0
-    trunc_len_r: 300
+    trunc_len_r: 230
     n_threads: 8
 
 taxonomy:
