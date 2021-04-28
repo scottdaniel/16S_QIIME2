@@ -4,7 +4,8 @@ TARGET_QIIME_IMPORT = [str(QIIME_OUTPUT_DIR + "/demux.qzv")]
 
 TARGET_DEMUX_STAT = [str(QIIME_OUTPUT_DIR + "/demux_stat/per-sample-fastq-counts.csv")]
 
-TARGET_DENOISE = [str(DENOISE_DIR + "/feature_table/feature-table.tsv")]
+TARGET_DENOISE = [str(DENOISE_DIR + "/feature_table/feature-table.tsv"),
+                  str(DENOISE_DIR + "/denoise_stats/stats.tsv")]
 
 TARGET_REPSEQ = [str(DENOISE_DIR + "/representative_seq_fasta/dna-sequences.fasta")]
 
