@@ -19,7 +19,7 @@
 	{
 		"account" : "hpcusers",
 		"partition" : "defq",
-		"memcpu" : "16G",
+		"memcpu" : "32G",
 		"time" : "24:0:0",
 		"name" : "dada2_assignSpecies"
   }
