@@ -47,3 +47,5 @@ vsearch:
     fasta_width: 0 #Width of alignment lines in fasta output, set to 0 to eliminate wrapping
     maxaccepts: 1 #Maximum number of hits to accept before stopping the search Default is 1
 
+picrust:
+    threads: 8

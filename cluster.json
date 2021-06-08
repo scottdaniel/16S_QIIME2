@@ -22,5 +22,13 @@
 		"memcpu" : "32G",
 		"time" : "24:0:0",
 		"name" : "dada2_assignSpecies"
+  },
+  "picrust2" :
+	{
+		"account" : "hpcusers",
+		"partition" : "defq",
+		"memcpu" : "32G",
+		"time" : "24:0:0",
+		"name" : "picrust2"
   }
 }
