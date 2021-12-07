@@ -30,7 +30,8 @@ TARGET_VSEARCH = [
     ]
 
 TARGET_PICRUST2 = [
-    str(DENOISE_DIR + "picrust_out/ko_exported/ko-feature-table.tsv")
+    str(DENOISE_DIR + "/picrust_out/ko_metagenome.qzv"),
+    str(DENOISE_DIR + "/picrust_out/ko_exported/ko-feature-table.tsv")
 ]
 
 TARGET_ALL = (
