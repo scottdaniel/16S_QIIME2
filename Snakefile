@@ -32,6 +32,7 @@ include: "rules/unassign/unassign.rules"
 include: "rules/report/report.rules"
 include: "rules/dada2_species/dada2.rules"
 include: "rules/vsearch/vsearch.rules"
+include: "rules/picrust2/picrust2.rules"
 
 workdir: PROJECT_DIR
 

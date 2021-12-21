@@ -303,6 +303,7 @@ dependencies:
   - q2-longitudinal=2019.7.0=py36_0
   - q2-metadata=2019.7.0=py36_0
   - q2-phylogeny=2019.7.0=py36_0
+  - q2-picrust2=2019.7=py36_0
   - q2-quality-control=2019.7.0=py36_0
   - q2-quality-filter=2019.7.0=py36_0
   - q2-sample-classifier=2019.7.1=py36_0

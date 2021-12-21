@@ -62,3 +62,17 @@ rule run_dada2:
         --o-representative-sequences {output.rep_seq} \
         --o-denoising-stats {output.stat}
         """ 
+
+rule denoising_stats_export:
+    input:
+        DENOISE_DIR + "/denoise_stats.qza"
+    params:
+        DENOISE_DIR + "/denoise_stats"
+    output:
+        DENOISE_DIR + "/denoise_stats/stats.tsv"
+    shell:
+        """
+        qiime tools export \
+        --input-path {input} \
+        --output-path {params}
+        """
