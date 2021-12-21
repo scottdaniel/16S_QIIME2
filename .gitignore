@@ -63,3 +63,4 @@ config_243.yml
 config_aurea.yml
 config_combo.yml
 logs
+*.out

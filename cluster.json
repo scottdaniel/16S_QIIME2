@@ -1,8 +1,34 @@
 {
-    "__default__" :
-    {
-        "h_vmem" : "8G",
-        "mem_free" : "6G",
-        "m_mem_free" : "5G"
-    }
+  "__default__" :
+	{
+		"account" : "hpcusers",
+		"partition" : "defq",
+		"mem" : "4G",
+		"time" : "12:0:0",
+		"name" : "16s_qiime2"
+	},
+  "run_dada2" :
+	{
+		"account" : "hpcusers",
+		"partition" : "defq",
+		"mem" : "16G",
+		"time" : "48:0:0",
+		"name" : "run_dada2"
+	},
+  "dada2_assignSpecies" :
+	{
+		"account" : "hpcusers",
+		"partition" : "defq",
+		"mem" : "32G",
+		"time" : "24:0:0",
+		"name" : "dada2_assignSpecies"
+  },
+  "picrust2" :
+	{
+		"account" : "hpcusers",
+		"partition" : "defq",
+		"mem" : "32G",
+		"time" : "72:0:0",
+		"name" : "picrust2"
+  }
 }
