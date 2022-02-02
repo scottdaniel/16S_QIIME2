@@ -1,8 +1,8 @@
 all:
-    project_dir: "/scr1/users/danielsg/davis_run_3_16s/Data"
+    project_dir: "/scr1/users/danielsg/abt_run_5/Data"
     mux_dir: "multiplexed_fastq"
-    mapping: "Davis_run_3_mapping_file.tsv"
-    admin_email: ""
+    mapping: "Abt_run_5_mapping_file.tsv"
+    admin_email: "danielsg@chop.edu"
 
 #try revcomp if you are getting 0 reads when demultiplexing
 demux:
@@ -24,14 +24,6 @@ diversity:
 
 unassign:
     unassigner_species_fp: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/unassign_data/unassigner_species.fasta"
-
-report:
-    study_group_var: "comparison"
-    min_reads: 5
-    richness_subsample_size: 20
-    rmd: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/scripts/Basic_Bioinformatics_Report.Rmd"
-    R_helper: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/scripts/helper_functions.R"
-    report_rdata: "/scr1/users/danielsg/davis_run_3_16s/Data/report.RData" # rmd can only have one output so have to put this here
 
 dada2:
     rscript: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/scripts/dada2.R"
