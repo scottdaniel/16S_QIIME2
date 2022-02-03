@@ -6,14 +6,14 @@ rule run_unassign:
     input:
         DENOISE_DIR + "/representative_seq_fasta/dna-sequences.fasta"
     params:
-#        unassigner_species_fp = config["unassign"]["unassigner_species_fp"],
+        unassigner_species_fp = config["unassign"]["unassigner_species_fp"],
         outdir = DENOISE_DIR + "/representative_seq_fasta/unassigned"
     output:
         DENOISE_DIR + "/representative_seq_fasta/unassigned/unassigner_output.tsv"
     shell:
         """
         unassign \
-#        --type_strain_fasta {params.unassigner_species_fp} \
+        --type_strain_fasta {params.unassigner_species_fp} \
         --output_dir {params.outdir} \
         {input}
         """
