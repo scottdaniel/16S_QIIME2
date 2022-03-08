@@ -1,7 +1,7 @@
 all:
-    project_dir: "/scr1/users/danielsg/abt_run_5/Data"
+    project_dir: "/scr1/users/danielsg/dana_graves_run_1/Data"
     mux_dir: "multiplexed_fastq"
-    mapping: "Abt_run_5_mapping_file.tsv"
+    mapping: "Graves_Dana_Run_1_mapping_file.tsv"
     admin_email: "danielsg@chop.edu"
 
 #try revcomp if you are getting 0 reads when demultiplexing
@@ -9,18 +9,19 @@ demux:
     mismatch: 0
     revcomp: true
 
+#~240 for V1V2, ~280 for V3V4
 denoise:
     trim_left_f: 0
-    trunc_len_f: 230
+    trunc_len_f: 240
     trim_left_r: 0
-    trunc_len_r: 230
+    trunc_len_r: 240
     n_threads: 8
 
 taxonomy:
     classifier_fp: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/QIIME2_data/gg-13-8-99-nb-classifier.qza"
 
 diversity:
-    sampling_depth: 30
+    sampling_depth: 1000
 
 unassign:
     unassigner_species_fp: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/unassign_data/unassigner_species.fasta"
