@@ -10,7 +10,7 @@
 #SBATCH --output=slurm_%x_%j.out
 
 source ~/.bashrc.conda #needed to make "conda" command to work
-conda activate qiime2-snakemake
+conda activate qiime2-snakemak
 
 set -xeuo pipefail
 
