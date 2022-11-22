@@ -23,6 +23,14 @@
 		"time" : "24:0:0",
 		"name" : "dada2_assignSpecies"
   },
+  "get_taxonomy" :
+	{
+		"account" : "hpcusers",
+		"partition" : "defq",
+		"mem" : "32G",
+		"time" : "24:0:0",
+		"name" : "get_taxonomy"
+  },
   "picrust2" :
 	{
 		"account" : "hpcusers",
