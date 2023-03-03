@@ -4,7 +4,8 @@ TARGET_QIIME_IMPORT = [str(QIIME_OUTPUT_DIR + "/demux.qzv")]
 
 TARGET_DEMUX_STAT = [str(QIIME_OUTPUT_DIR + "/demux_stat/per-sample-fastq-counts.csv")]
 
-TARGET_DENOISE = [str(DENOISE_DIR + "/feature_table/feature-table.tsv")]
+TARGET_DENOISE = [str(DENOISE_DIR + "/feature_table/feature-table.tsv"),
+                  str(DENOISE_DIR + "/denoise_stats/stats.tsv")]
 
 TARGET_REPSEQ = [str(DENOISE_DIR + "/representative_seq_fasta/dna-sequences.fasta")]
 
@@ -14,11 +15,12 @@ TARGET_TREE = [str(DENOISE_DIR + "/rooted-tree.qza")]
 
 TARGET_DIVERSITY = [str(CORE_METRIC_DIR + "/faith_pd.tsv"),
                     str(CORE_METRIC_DIR + "/uu.tsv"),
-                    str(CORE_METRIC_DIR + "/wu.tsv")]
+                    str(CORE_METRIC_DIR + "/wu.tsv"),
+		    str(CORE_METRIC_UNRAREFIED_DIR + "/faith_pd_unrarefied.tsv"),
+		    str(CORE_METRIC_UNRAREFIED_DIR + "/uu_unrarefied.tsv"),
+		    str(CORE_METRIC_UNRAREFIED_DIR + "/wu_unrarefied.tsv")]
 
 TARGET_UNASSIGN = [str(DENOISE_DIR + "/representative_seq_fasta/unassigned/unassigner_output.tsv")]
-
-TARGET_REPORT = [str(CORE_METRIC_DIR + "/basic_bioinformatics_report/Basic_Bioinformatics_Report.html")]
 
 TARGET_DADA2SP = [str(DENOISE_DIR + "/representative_seq_fasta/dada2/dada2_species_assignments.tsv"),
                   str(DENOISE_DIR + "/representative_seq_fasta/dada2/dada2.RData")]
@@ -27,6 +29,11 @@ TARGET_VSEARCH = [
     str(DENOISE_DIR + "/representative_seq_fasta/vsearch/vsearch_report.tsv"),
     str(DENOISE_DIR + "/representative_seq_fasta/vsearch/vsearch.fasta")
     ]
+
+TARGET_PICRUST2 = [
+    str(DENOISE_DIR + "/picrust_out/ko_metagenome.qzv"),
+    str(DENOISE_DIR + "/picrust_out/ko_exported/ko-feature-table.tsv")
+]
 
 TARGET_ALL = (
     TARGET_DNABC +
@@ -37,8 +44,8 @@ TARGET_ALL = (
     TARGET_TAXONOMY +
     TARGET_TREE +
     TARGET_DIVERSITY +
-    TARGET_UNASSIGN +
-    TARGET_REPORT +
-    TARGET_DADA2SP +
-    TARGET_VSEARCH
+    TARGET_UNASSIGN #+
+    #TARGET_DADA2SP +
+    #TARGET_VSEARCH
+    #TARGET_PICRUST2
 )
