@@ -10,25 +10,13 @@
 #SBATCH --output=slurm_%x_%j.out
 
 source ~/.bashrc.conda #needed to make "conda" command to work
-conda activate qiime2-snakemake
+conda activate qiime2-2023.2
 
 set -xeuo pipefail
 
-if [ $# -ne 1 ]; then
-    echo "Usage: bash $0 PATH_TO_CONFIG"
+if [[ -f config.yaml ]]; then
+    echo "Must have a config.yaml to be able to run"
     exit 1
 fi
 
-CONFIG_FP=$1
-
-snakemake \
-    --nolock \
-    --jobs 100 \
-    --configfile ${CONFIG_FP} \
-    --cluster-config cluster.json \
-    --keep-going \
-    --latency-wait 90 \
-    --notemp \
-    --printshellcmds \
-    --cluster \
-    "sbatch --account={cluster.account} --partition={cluster.partition} --mem={cluster.mem} --cpus-per-task={threads} --time={cluster.time} --job-name={cluster.name} --output=slurm_%x_%j.out"
+snakemake --profile ./
