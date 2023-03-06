@@ -6,8 +6,7 @@ rule picrust2:
     input: 
       feature_table = DENOISE_DIR + "/table.qza",
       rep_seq = DENOISE_DIR + "/representative-seqs.qza"
-    params: 
-      threads = str(config["picrust"]["threads"])
+    threads: config["picrust"]["threads"]
     output: 
       ko = DENOISE_DIR + "/picrust_out/ko_metagenome.qza",
       ec = DENOISE_DIR + "/picrust_out/ec_metagenome.qza",
@@ -15,7 +14,7 @@ rule picrust2:
     shell:
         """
         qiime picrust2 full-pipeline \
-        --verbose --p-threads {params.threads} \
+        --verbose --p-threads {threads} \
         --i-table {input.feature_table} \
         --i-seq {input.rep_seq} \
         --o-ko-metagenome {output.ko} \
