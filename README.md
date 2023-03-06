@@ -10,7 +10,7 @@ git clone https://github.com/PennChopMicrobiomeProgram/16S_QIIME2.git
 - Create a conda environment:
 ```bash
 cd 16S_QIIME2
-conda env create -f environment.yml
+conda create --name qiime2-2023.2 --file environment.yml
 ```
 
 To run the pipeline, activate the envrionment (currently based on **QIIME2 2023.2**) by entering
