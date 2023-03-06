@@ -6,7 +6,7 @@ rule picrust2:
     input: 
       feature_table = DENOISE_DIR + "/table.qza",
       rep_seq = DENOISE_DIR + "/representative-seqs.qza"
-    threads: config["picrust"]["threads"]
+    threads: 1 #should be overridden by config.yaml
     output: 
       ko = DENOISE_DIR + "/picrust_out/ko_metagenome.qza",
       ec = DENOISE_DIR + "/picrust_out/ec_metagenome.qza",
