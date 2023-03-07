@@ -41,4 +41,4 @@ set-resources:
   - picrust2:mem_mb=32000
   - picrust2:runtime=4320
 
-configfile: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/qiime2_config.yml"
+configfile: "/mnt/isilon/microbiome/analysis/userid/16S_QIIME2/qiime2_config.yml"

@@ -1,8 +1,8 @@
 all:
-    project_dir: "/mnt/isilon/microbiome/analysis/danielsg/16S_QIIME2/test"
+    project_dir: "/mnt/isilon/microbiome/analysis/userid/16S_QIIME2/test"
     mux_dir: "multiplexed_fastq"
     mapping: "test_mapping_file.tsv"
-    admin_email: "danielsg@chop.edu"
+    admin_email: "userid@email"
 
 #try revcomp if you are getting 0 reads when demultiplexing
 demux:
