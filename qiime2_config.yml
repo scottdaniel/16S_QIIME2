@@ -22,9 +22,11 @@ taxonomy:
 
 diversity:
     sampling_depth: 100
+#100 is just for testing, recommend change to 1000
 
 unassign:
-    unassigner_species_fp: "/mnt/isilon/microbiome/analysis/biodata/unassigner/unassigner_species.fasta"
+    unassigner_species_fp: "/path/to/unassigner_species.fasta"
+#change to correct path once database is downloaded from first run
 
 dada2:
     rscript: "/mnt/isilon/microbiome/analysis/biodata/dada2/dada2.R"
