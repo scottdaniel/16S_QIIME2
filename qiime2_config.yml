@@ -7,7 +7,7 @@ all:
 #try revcomp if you are getting 0 reads when demultiplexing
 demux:
     mismatch: 0
-    revcomp: true
+    revcomp: false
 
 #~240 for V1V2, ~280 for V3V4
 denoise:

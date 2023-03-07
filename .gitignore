@@ -57,10 +57,10 @@ test/cluster_logs/
 test/manifest.csv
 test/total_read_counts.tsv
 test/report.RData
-<<<<<<< HEAD
 config_243.yml
 config_aurea.yml
 config_combo.yml
 *.out
 logs/
 unassign_data/unassigner_species.udb
+test/unassigned_read_counts.tsv
