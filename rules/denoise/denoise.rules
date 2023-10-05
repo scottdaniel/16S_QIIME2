@@ -43,8 +43,7 @@ rule get_feature_table:
 rule run_dada2:
     input:
         QIIME_OUTPUT_DIR + "/demux.qza"
-    params:
-        n_threads = config["denoise"]["n_threads"]
+    threads: 1 #should be overridden by config.yaml
     output:
         feature_table = DENOISE_DIR + "/table_main.qza",
         rep_seq = DENOISE_DIR + "/representative-seqs.qza",
@@ -57,11 +56,25 @@ rule run_dada2:
         --p-trunc-len-f {trunc_len_f} \
         --p-trim-left-r {trim_left_r} \
         --p-trunc-len-r {trunc_len_r} \
-        --p-n-threads {params.n_threads} \
+        --p-n-threads {threads} \
         --o-table {output.feature_table} \
         --o-representative-sequences {output.rep_seq} \
         --o-denoising-stats {output.stat}
         """ 
+
+rule denoising_stats_export:
+    input:
+        DENOISE_DIR + "/denoise_stats.qza"
+    params:
+        DENOISE_DIR + "/denoise_stats"
+    output:
+        DENOISE_DIR + "/denoise_stats/stats.tsv"
+    shell:
+        """
+        qiime tools export \
+        --input-path {input} \
+        --output-path {params}
+        """
 
 rule filter_empty:
     input:
