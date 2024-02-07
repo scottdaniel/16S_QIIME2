@@ -12,6 +12,7 @@ git clone https://github.com/PennChopMicrobiomeProgram/16S_QIIME2.git
 cd 16S_QIIME2
 conda create --name qiime2-2023.2 --file environment.yml
 ```
+If this doesn't work or you're not on a linux platform, you can manually install following these instructions: (https://docs.qiime2.org/2023.9/install/native/)
 
 To run the pipeline, activate the envrionment (currently based on **QIIME2 2023.2**) by entering
 `conda activate qiime2-2023.2`
@@ -123,3 +124,11 @@ NB: Currently picrust2-2021.11_0 does not work with qiime2 2023.2 but these woul
 - KEGG orthologs counts (tsv)
 - Enzyme classification counts (QIIME2 artifact)
 - KEGG pathway counts (QIIME2 artifact)
+
+## Updating qiime2
+
+1. Manually install a new version of qiime2 using conda (https://docs.qiime2.org/2023.9/install/native/)
+2. Update the `environment.yml` using:
+3. `conda activate myenv`
+4. `conda env export > environment.yml`
+5. git commit / push your changes (to your own fork) and create a pull request for PennCHOPMicrobiomeProgram/16S_QIIME2
