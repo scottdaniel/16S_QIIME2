@@ -31,17 +31,9 @@ include: "rules/diversity/diversity.rules"
 include: "rules/unassign/unassign.rules"
 include: "rules/dada2_species/dada2.rules"
 include: "rules/vsearch/vsearch.rules"
-include: "rules/picrust2/picrust2.rules"
 
 workdir: PROJECT_DIR
 
 rule all:
     input: TARGET_ALL
 
-onsuccess:
-        print("Workflow finished, no error")
-        shell("mail -s 'Workflow finished successfully' " + config["all"]["admin_email"] + " < {log}")
-
-onerror:
-        print("An error occurred")
-        shell("mail -s 'An error occurred' " + config["all"]["admin_email"] + " < {log}")
