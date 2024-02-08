@@ -30,11 +30,6 @@ TARGET_VSEARCH = [
     str(DENOISE_DIR + "/representative_seq_fasta/vsearch/vsearch.fasta")
     ]
 
-TARGET_PICRUST2 = [
-    str(DENOISE_DIR + "/picrust_out/ko_metagenome.qzv"),
-    str(DENOISE_DIR + "/picrust_out/ko_exported/ko-feature-table.tsv")
-]
-
 TARGET_ALL = (
     TARGET_DNABC +
     TARGET_QIIME_IMPORT +
@@ -46,6 +41,5 @@ TARGET_ALL = (
     TARGET_DIVERSITY +
     TARGET_UNASSIGN +
     TARGET_DADA2SP +
-    TARGET_VSEARCH #+
-    #TARGET_PICRUST2
+    TARGET_VSEARCH
 )
