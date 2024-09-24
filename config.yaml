@@ -25,20 +25,27 @@ default-resources:
   - runtime=120
   - mem_mb=4000
   - disk_mb=1000
+  # - tmpdir="/scr1/users/danielsg" # can set this to your scratch directory if needed for space
 # set-threads: map rule names to threads
 set-threads:
   - run_vsearch=4
   - run_dada2=8
   - picrust2=8
+  - get_taxonomy=8
 # set-resources: map rule names to resources in general
 set-resources:
   - run_dada2:mem_mb=16000
   - run_dada2:runtime=2880
   - dada2_assignSpecies:mem_mb=32000
   - dada2_assignSpecies:runtime=1440
-  - get_taxonomy:mem_mb=32000
+  - get_taxonomy:mem_mb=128000
   - get_taxonomy:runtime=1440
   - picrust2:mem_mb=32000
   - picrust2:runtime=4320
+  - alignment:mem_mb=16000
+  - alignment:runtime=360
+  - run_unassign:mem_mb=16000
+  - run_unassign:runtime=360
 
-configfile: "/mnt/isilon/microbiome/analysis/userid/16S_QIIME2/qiime2_config.yml"
+
+configfile: "/scr1/users/danielsg/CHOPMC-409_microcart/Scripts/HPC_cluster/16S_QIIME2/qiime2_config.yml"
