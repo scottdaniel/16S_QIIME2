@@ -20,11 +20,14 @@ rule get_taxonomy:
     input:
         classifier = config["taxonomy"]["classifier_fp"],
         rep_seq = DENOISE_DIR + "/representative-seqs.qza"
+    threads:
+        1
     output:
         DENOISE_DIR + "/taxonomy/classification.qza"
     shell:
         """
         qiime feature-classifier classify-sklearn \
+        --p-n-jobs {threads} \
         --i-classifier {input.classifier} \
         --i-reads {input.rep_seq} \
         --o-classification {output}
