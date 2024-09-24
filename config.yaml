@@ -38,14 +38,14 @@ set-resources:
   - run_dada2:runtime=2880
   - dada2_assignSpecies:mem_mb=32000
   - dada2_assignSpecies:runtime=1440
-  - get_taxonomy:mem_mb=128000
+  - get_taxonomy:mem_mb=32000
   - get_taxonomy:runtime=1440
   - picrust2:mem_mb=32000
   - picrust2:runtime=4320
-  - alignment:mem_mb=16000
+  - alignment:mem_mb=8000
   - alignment:runtime=360
-  - run_unassign:mem_mb=16000
+  - run_unassign:mem_mb=8000
   - run_unassign:runtime=360
 
 
-configfile: "/scr1/users/danielsg/CHOPMC-409_microcart/Scripts/HPC_cluster/16S_QIIME2/qiime2_config.yml"
+configfile: "/scr1/users/someone/qiime2_config.yml"
