@@ -18,7 +18,7 @@ denoise:
 #threads are now specificed in config.yaml
 
 taxonomy:
-    classifier_fp: "/mnt/isilon/microbiome/analysis/biodata/silva/silva_138/silva-138-99-nb-classifier.qza"
+    classifier_fp: "/mnt/isilon/microbiome/analysis/biodata/silva/silva_138_2024/silva-138-99-nb-classifier.qza"
 
 diversity:
     sampling_depth: 1000
