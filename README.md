@@ -116,7 +116,8 @@ To run the pipeline, we need
 ## Updating qiime2
 
 1. Manually install a new version of qiime2 using conda (https://library.qiime2.org/quickstart/amplicon)
-2. Update the `environment.yml` using:
-3. `conda activate myenv`
-4. `conda env export > environment.yml`
-5. git commit / push your changes (to your own fork) and create a pull request for scottdaniel/16S_QIIME2
+2. Activate the environment and additionally install snakemake, dnabc, and unassigner
+3. Update the `environment.yml` using:
+4. `conda activate myenv`
+5. `conda env export > environment.yml`
+6. git commit / push your changes (to your own fork) and create a pull request for scottdaniel/16S_QIIME2
