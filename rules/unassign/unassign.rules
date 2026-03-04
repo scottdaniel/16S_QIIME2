@@ -10,8 +10,12 @@ rule run_unassign:
         outdir = DENOISE_DIR + "/representative_seq_fasta/unassigned"
     output:
         DENOISE_DIR + "/representative_seq_fasta/unassigned/unassigner_output.tsv"
+    conda:
+        "unassigner_env.yml"
     shell:
         """
+        vsearch --version
+
         if [[ -f {params.unassigner_species_fp} ]]; then
             unassign \
             --type_strain_fasta {params.unassigner_species_fp} \
