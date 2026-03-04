@@ -2,20 +2,20 @@
 This is a Snakemake based 16S QIIME2 pipeline.
 
 ## Installation
-To install, we assume you already have installed `Miniconda3 (4.7.10+)` (https://docs.conda.io/en/latest/miniconda.html)
+To install, we assume you already have installed `Miniconda3` (https://docs.conda.io/en/latest/miniconda.html)
 - Clone this repository:
 ```bash
-git clone https://github.com/PennChopMicrobiomeProgram/16S_QIIME2.git
+git clone https://github.com/scottdaniel/16S_QIIME2.git
 ```
 - Create a conda environment:
 ```bash
 cd 16S_QIIME2
-conda create --name qiime2-2023.2 --file environment.yml
+conda create --name qiime2-amplicon-2026.1 --file environment.yml
 ```
-If this doesn't work or you're not on a linux platform, you can manually install following these instructions: (https://docs.qiime2.org/2023.9/install/native/)
+If this doesn't work or you're not on a linux platform, you can manually install following these instructions: (https://library.qiime2.org/quickstart/amplicon)
 
-To run the pipeline, activate the envrionment (currently based on **QIIME2 2023.2**) by entering
-`conda activate qiime2-2023.2`
+To run the pipeline, activate the envrionment (currently based on **qiime2-amplicon-2026.1**) by entering
+`conda activate qiime2-amplicon-2026.1`
 
 - The following software also need to be installed within the environment you created:
   - `dnabc` (https://github.com/PennChopMicrobiomeProgram/dnabc)
@@ -29,7 +29,7 @@ To run the pipeline, we need
   - The first two columns should be `SampleID` (or `#SampleID`) and `BarcodeSequence`
 
 ## Databases required
-`Qiime2 classifier` (https://docs.qiime2.org/2023.2/data-resources/)
+`Qiime2 classifier` (https://library.qiime2.org/data-resources#qiime-2-2024-5-present)
 `dada2 training set` (https://benjjneb.github.io/dada2/training.html)
 
 ## How to run
@@ -113,22 +113,11 @@ To run the pipeline, we need
 - Vsearch report (tsv) customized to be like BLAST results (see config.yml)
 - Vsearch list of representative sequences that aligned (fasta)
 
-NB: Currently picrust2-2021.11_0 does not work with qiime2 2023.2 but these would be the outputs if it did:
-### picrust2
-
-#### Input
-- Feature table (QIIME2 artifact, tsv)
-- Representative sequences (QIIME2 artifact, fasta)
-
-#### Output
-- KEGG orthologs counts (tsv)
-- Enzyme classification counts (QIIME2 artifact)
-- KEGG pathway counts (QIIME2 artifact)
-
 ## Updating qiime2
 
-1. Manually install a new version of qiime2 using conda (https://docs.qiime2.org/2023.9/install/native/)
-2. Update the `environment.yml` using:
-3. `conda activate myenv`
-4. `conda env export > environment.yml`
-5. git commit / push your changes (to your own fork) and create a pull request for PennCHOPMicrobiomeProgram/16S_QIIME2
+1. Manually install a new version of qiime2 using conda (https://library.qiime2.org/quickstart/amplicon)
+2. Activate the environment and additionally install snakemake, dnabc, and unassigner
+3. Update the `environment.yml` using:
+4. `conda activate myenv`
+5. `conda env export > environment.yml`
+6. git commit / push your changes (to your own fork) and create a pull request for scottdaniel/16S_QIIME2

@@ -47,7 +47,8 @@ rule run_dada2:
     output:
         feature_table = DENOISE_DIR + "/table_raw.qza",
         rep_seq = DENOISE_DIR + "/representative-seqs.qza",
-        stat = DENOISE_DIR + "/denoise_stats.qza"
+        stat = DENOISE_DIR + "/denoise_stats.qza",
+        base = DENOISE_DIR + "/base-transition-stats.qza"
     shell:
         """
         qiime dada2 denoise-paired \
@@ -59,7 +60,8 @@ rule run_dada2:
         --p-n-threads {threads} \
         --o-table {output.feature_table} \
         --o-representative-sequences {output.rep_seq} \
-        --o-denoising-stats {output.stat}
+        --o-denoising-stats {output.stat} \
+        --o-base-transition-stats {output.base}
         """ 
 
 rule denoising_stats_export:

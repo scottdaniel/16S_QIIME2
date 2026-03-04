@@ -15,8 +15,8 @@ if [[ ! -f ./config.yaml ]]; then
 fi
 
 source ~/.bashrc.conda #needed to make "conda" command to work
-conda activate qiime2-2023.2
+conda activate qiime2-amplicon-2026.1
 
 set -xeuo pipefail
 
-snakemake --profile ./
+snakemake --use-conda --conda-frontend conda --profile ./
