@@ -1,0 +1,19 @@
+rule all_copy:
+    input:
+        TARGET_COPY
+
+# Copy the multiplexed fastq.gz files from the raw_data run folder into the
+# project (only defined when all: raw_data is set in qiime2_config.yml).
+# Runs locally rather than as a cluster job since it's just a cp.
+if RAW_DIR:
+    localrules: copy_raw_fastq
+
+    rule copy_raw_fastq:
+        input:
+            RAW_DIR + "/{fastq}"
+        output:
+            MUX_DIR + "/{fastq}"
+        wildcard_constraints:
+            fastq = "|".join(re.escape(f) for f in RAW_FASTQS)
+        shell:
+            "cp {input} {output}"

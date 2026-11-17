@@ -1,7 +1,13 @@
 all:
-    project_dir: "/scr1/users/path/to/project"
-    mux_dir: "multiplexed_fastq"
-    mapping: "mapping_table.tsv"
+    # Run folder in raw_data_root with the multiplexed fastq.gz files, e.g. "180103_M04734_0069_000000000-BGMCR_L001"
+    # All *.fastq.gz in it are copied to <project_dir>/<mux_dir>. Set to "" to skip copying (fastqs already in mux_dir)
+    raw_data: "YYMMDD_MXXXXX_XXXX_000000000-XXXXX_L001"
+    raw_data_root: "/mnt/isilon/microbiome/raw_data"
+    # Leave "" to use the project this pipeline is a submodule of (e.g. /scr1/users/danielsg/Henderson_Harmon_358
+    # for /scr1/users/danielsg/Henderson_Harmon_358/Scripts/HPC_cluster/16S_QIIME2), or give a full path
+    project_dir: ""
+    mux_dir: "Data/multiplexed_fastq" # relative to project_dir
+    mapping: "mapping_table.tsv" # relative to project_dir
 
 #try revcomp if you are getting 0 reads when demultiplexing
 demux:
