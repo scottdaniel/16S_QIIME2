@@ -5,8 +5,8 @@ import yaml
 
 from scripts import util_functions
 
-# Use project_dir from the config if set, otherwise the project this pipeline is
-# a git submodule of (e.g. a blank_16s project with Scripts/HPC_cluster/16S_QIIME2)
+# Use project_dir from the config if set, otherwise the project the pipeline sits in
+# as a git submodule (e.g. a blank_16s project, in Scripts/HPC_cluster/16S_QIIME2)
 PROJECT_DIR = (config["all"].get("project_dir") or
                util_functions.find_project_dir(workflow.basedir))
 if not PROJECT_DIR:
@@ -28,8 +28,22 @@ else:
     RAW_FASTQS = []
 
 QIIME_OUTPUT_DIR = PROJECT_DIR + "/QIIME_output"
-MAPPING_FP = PROJECT_DIR + "/" + config["all"]["mapping"]
-SAMPLE_IDS = util_functions.get_sample(MAPPING_FP)
+
+# Mapping file in project_dir. If mapping is left blank, use the .tsv in the
+# raw_data folder (MAPPING_SRC), which gets copied to project_dir.
+MAPPING = config["all"].get("mapping") or ""
+MAPPING_SRC = ""
+if not MAPPING:
+    if not RAW_DIR:
+        raise ValueError("all: mapping can only be left blank when all: raw_data is set "
+                         "in qiime2_config.yml")
+    MAPPING_SRC = util_functions.get_raw_mapping(RAW_DIR)
+    MAPPING = os.path.basename(MAPPING_SRC)
+MAPPING_FP = os.path.join(PROJECT_DIR, MAPPING)
+# Sample IDs are needed now, before the copy has run, so read them from the
+# raw_data copy until the project_dir copy exists
+SAMPLE_IDS = util_functions.get_sample(
+    MAPPING_SRC if MAPPING_SRC and not os.path.exists(MAPPING_FP) else MAPPING_FP)
 
 trim_left_f = config["denoise"]["trim_left_f"]
 trunc_len_f = config["denoise"]["trunc_len_f"]

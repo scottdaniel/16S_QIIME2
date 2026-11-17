@@ -34,3 +34,13 @@ def get_raw_fastqs(raw_dir):
    if not fastqs:
       raise ValueError("No *.fastq.gz files found in raw_data directory: " + raw_dir)
    return fastqs
+
+
+def get_raw_mapping(raw_dir):
+   """Return the path of the one *.tsv mapping file in raw_dir."""
+   tsvs = sorted(glob.glob(os.path.join(raw_dir, "*.tsv")))
+   if len(tsvs) != 1:
+      raise ValueError("Expected one .tsv mapping file in " + raw_dir + ", found " +
+                       str(len(tsvs)) + ": " + ", ".join(os.path.basename(f) for f in tsvs) +
+                       "\nSet all: mapping in qiime2_config.yml instead")
+   return tsvs[0]

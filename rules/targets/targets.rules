@@ -1,4 +1,5 @@
-TARGET_COPY = [MUX_DIR + "/" + fastq for fastq in RAW_FASTQS]
+TARGET_COPY = ([MUX_DIR + "/" + fastq for fastq in RAW_FASTQS] +
+               ([MAPPING_FP] if MAPPING_SRC else []))
 
 TARGET_DNABC = expand(PROJECT_DIR + "/demultiplexed_fastq_gz/{sample}_{direction}.fastq.gz", sample = SAMPLE_IDS, direction = ["R1", "R2"])
 

@@ -17,3 +17,16 @@ if RAW_DIR:
             fastq = "|".join(re.escape(f) for f in RAW_FASTQS)
         shell:
             "cp {input} {output}"
+
+# Copy the mapping .tsv from the raw_data folder into project_dir (only defined
+# when all: mapping is left blank in qiime2_config.yml)
+if MAPPING_SRC:
+    localrules: copy_mapping
+
+    rule copy_mapping:
+        input:
+            MAPPING_SRC
+        output:
+            MAPPING_FP
+        shell:
+            "cp {input} {output}"
