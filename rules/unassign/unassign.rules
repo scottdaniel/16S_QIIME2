@@ -7,7 +7,8 @@ rule run_unassign:
         DENOISE_DIR + "/representative_seq_fasta/dna-sequences.fasta"
     params:
         unassigner_species_fp = config["unassign"]["unassigner_species_fp"],
-        outdir = DENOISE_DIR + "/representative_seq_fasta/unassigned"
+        outdir = DENOISE_DIR + "/representative_seq_fasta/unassigned",
+        db_dir = DENOISE_DIR + "/representative_seq_fasta/unassigned/db"
     output:
         DENOISE_DIR + "/representative_seq_fasta/unassigned/unassigner_output.tsv"
     conda:
@@ -16,11 +17,22 @@ rule run_unassign:
         """
         vsearch --version
 
+        # unassigner reuses unassigner_query_hits.txt if it is already in the output
+        # dir, so clear out anything left from a previous (e.g. failed) run
+        rm -rf {params.outdir}
+        mkdir -p {params.outdir}
+
         if [[ -f {params.unassigner_species_fp} ]]; then
+            # unassigner searches <fasta minus extension>.udb if it exists and never
+            # rebuilds it, so a stale .udb next to the shared fasta gives KeyErrors.
+            # Copy the fasta so a matching .udb is built fresh for each run.
+            mkdir -p {params.db_dir}
+            cp {params.unassigner_species_fp} {params.db_dir}/unassigner_species.fasta
             unassign \
-            --type_strain_fasta {params.unassigner_species_fp} \
+            --type_strain_fasta {params.db_dir}/unassigner_species.fasta \
             --output_dir {params.outdir} \
             {input}
+            rm -r {params.db_dir}
         else
             unassign \
             --output_dir {params.outdir} \
