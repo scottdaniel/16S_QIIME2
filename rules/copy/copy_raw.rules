@@ -33,11 +33,12 @@ if RAW_FASTERQS:
         wildcard_constraints:
             name = "|".join(re.escape(n) for n in RAW_FASTERQS)
         threads: 1 #should be overridden by config.yaml
+        # --numthreads, not --numtasks: --numtasks is petasuite's multi-machine (SLURM array) mode
         shell:
             """
             cp {input} {params.fasterq}
             set +u; module load petagene; set -u
-            petasuite --numtasks {threads} -d --md5match --replace {params.fasterq}
+            petasuite --numthreads {threads} -d --md5match --replace {params.fasterq}
             # in case petasuite gives back an uncompressed fastq
             if [[ ! -f {output} && -f {params.fastq} ]]; then gzip {params.fastq}; fi
             """
