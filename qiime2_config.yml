@@ -9,6 +9,8 @@ all:
     # /scr1/users/danielsg/Henderson_Harmon_358/Scripts/HPC_cluster/16S_QIIME2
     project_dir: ""
     mux_dir: "Data/multiplexed_fastq" # relative to project_dir
+    # Where demultiplexed_fastq, demultiplexed_fastq_gz and QIIME_output go, relative to project_dir ("" for project_dir itself)
+    data_dir: "Data"
     # Mapping file name, relative to project_dir. If left blank (""), the .tsv file in the raw_data
     # folder is copied to project_dir and used (there must be exactly one .tsv there)
     mapping: ""

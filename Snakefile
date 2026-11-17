@@ -29,7 +29,10 @@ else:
     RAW_FASTQS = []
     RAW_FASTERQS = []
 
-QIIME_OUTPUT_DIR = PROJECT_DIR + "/QIIME_output"
+# Pipeline output (demultiplexed fastqs and QIIME_output) goes in data_dir, relative to
+# project_dir. manifest.csv, the read count tables and the mapping file stay in project_dir.
+DATA_DIR = os.path.normpath(os.path.join(PROJECT_DIR, config["all"].get("data_dir", "Data")))
+QIIME_OUTPUT_DIR = DATA_DIR + "/QIIME_output"
 
 # Mapping file in project_dir. If mapping is left blank, use the .tsv in the
 # raw_data folder (MAPPING_SRC), which gets copied to project_dir.
