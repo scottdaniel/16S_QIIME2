@@ -1,6 +1,7 @@
 all:
-    # Run folder in raw_data_root with the multiplexed fastq.gz files, e.g. "180103_M04734_0069_000000000-BGMCR_L001"
-    # All *.fastq.gz in it are copied to <project_dir>/<mux_dir>. Set to "" to skip copying (fastqs already in mux_dir)
+    # Run folder in raw_data_root with the multiplexed fastq.gz or PetaGene .fasterq files, e.g. "180103_M04734_0069_000000000-BGMCR_L001"
+    # All *.fastq.gz and *.fasterq in it are copied to <project_dir>/<mux_dir> (.fasterq are decompressed to fastq.gz with petasuite)
+    # Set to "" to skip copying (fastqs already in mux_dir)
     raw_data: "YYMMDD_MXXXXX_XXXX_000000000-XXXXX_L001"
     raw_data_root: "/mnt/isilon/microbiome/raw_data"
     # Full path to the project directory. If left blank (""), the pipeline uses the project it sits in,

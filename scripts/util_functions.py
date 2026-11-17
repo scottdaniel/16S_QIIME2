@@ -26,14 +26,20 @@ def find_project_dir(pipeline_dir):
 
 
 def get_raw_fastqs(raw_dir):
-   """Return the names of all *.fastq.gz files in raw_dir."""
+   """Return the names (without extension) of the *.fastq.gz files and of the
+   PetaGene-compressed *.fasterq files in raw_dir. A file found in both forms is
+   only listed as a fastq.gz."""
    if not os.path.isdir(raw_dir):
       raise ValueError("raw_data directory not found: " + raw_dir +
                        "\nCheck all: raw_data (and raw_data_root) in qiime2_config.yml")
-   fastqs = sorted(os.path.basename(f) for f in glob.glob(os.path.join(raw_dir, "*.fastq.gz")))
-   if not fastqs:
-      raise ValueError("No *.fastq.gz files found in raw_data directory: " + raw_dir)
-   return fastqs
+   def names(ext):
+      return sorted(os.path.basename(f)[:-len(ext)]
+                    for f in glob.glob(os.path.join(raw_dir, "*" + ext)))
+   fastqs = names(".fastq.gz")
+   fasterqs = [n for n in names(".fasterq") if n not in fastqs]
+   if not fastqs and not fasterqs:
+      raise ValueError("No *.fastq.gz or *.fasterq files found in raw_data directory: " + raw_dir)
+   return fastqs, fasterqs
 
 
 def get_raw_mapping(raw_dir):

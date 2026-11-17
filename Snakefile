@@ -16,16 +16,18 @@ PROJECT_DIR = os.path.abspath(os.path.expanduser(PROJECT_DIR))
 
 MUX_DIR = os.path.join(PROJECT_DIR, config["all"]["mux_dir"])
 
-# Run folder with the multiplexed fastq.gz files; all of them get copied to MUX_DIR.
-# Leave raw_data empty to skip copying (fastqs already in MUX_DIR).
+# Run folder with the multiplexed fastq.gz and/or PetaGene .fasterq files; all of
+# them end up in MUX_DIR as fastq.gz. Leave raw_data empty to skip copying
+# (fastqs already in MUX_DIR).
 RAW_DATA = config["all"].get("raw_data") or ""
 if RAW_DATA:
     RAW_DIR = os.path.join(
         config["all"].get("raw_data_root", "/mnt/isilon/microbiome/raw_data"), RAW_DATA)
-    RAW_FASTQS = util_functions.get_raw_fastqs(RAW_DIR)
+    RAW_FASTQS, RAW_FASTERQS = util_functions.get_raw_fastqs(RAW_DIR)
 else:
     RAW_DIR = ""
     RAW_FASTQS = []
+    RAW_FASTERQS = []
 
 QIIME_OUTPUT_DIR = PROJECT_DIR + "/QIIME_output"
 
