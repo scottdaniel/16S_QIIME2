@@ -1,0 +1,57 @@
+rule all_copy:
+    input:
+        TARGET_COPY
+
+# Copy the multiplexed fastq.gz files from the raw_data run folder into the
+# project (only defined when all: raw_data is set in qiime2_config.yml).
+# Runs locally rather than as a cluster job since it's just a cp.
+if RAW_FASTQS:
+    localrules: copy_raw_fastq
+
+    rule copy_raw_fastq:
+        input:
+            RAW_DIR + "/{name}.fastq.gz"
+        output:
+            MUX_DIR + "/{name}.fastq.gz"
+        wildcard_constraints:
+            name = "|".join(re.escape(n) for n in RAW_FASTQS)
+        shell:
+            "cp {input} {output}"
+
+# Copy the PetaGene-compressed .fasterq files from the raw_data run folder into
+# the project and decompress them back to fastq.gz (--replace removes the
+# .fasterq copy once it's decompressed)
+if RAW_FASTERQS:
+    rule decompress_fasterq:
+        input:
+            RAW_DIR + "/{name}.fasterq"
+        output:
+            MUX_DIR + "/{name}.fastq.gz"
+        params:
+            fasterq = MUX_DIR + "/{name}.fasterq",
+            fastq = MUX_DIR + "/{name}.fastq"
+        wildcard_constraints:
+            name = "|".join(re.escape(n) for n in RAW_FASTERQS)
+        threads: 1 #should be overridden by config.yaml
+        # --numthreads, not --numtasks: --numtasks is petasuite's multi-machine (SLURM array) mode
+        shell:
+            """
+            cp {input} {params.fasterq}
+            set +u; module load petagene; set -u
+            petasuite --numthreads {threads} -d --md5match --replace {params.fasterq}
+            # in case petasuite gives back an uncompressed fastq
+            if [[ ! -f {output} && -f {params.fastq} ]]; then gzip {params.fastq}; fi
+            """
+
+# Copy the mapping .tsv from the raw_data folder into project_dir (only defined
+# when all: mapping is left blank in qiime2_config.yml)
+if MAPPING_SRC:
+    localrules: copy_mapping
+
+    rule copy_mapping:
+        input:
+            MAPPING_SRC
+        output:
+            MAPPING_FP
+        shell:
+            "cp {input} {output}"

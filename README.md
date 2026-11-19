@@ -20,6 +20,7 @@ To run the pipeline, activate the envrionment (currently based on **qiime2-ampli
 - The following software also need to be installed within the environment you created:
   - `dnabc` (https://github.com/PennChopMicrobiomeProgram/dnabc)
   - `unassigner` (https://github.com/kylebittinger/unassigner)
+- To use raw data compressed by PetaGene (`.fasterq` files), `petasuite` must be available on the cluster via `module load petagene`
 
 ## Required input files for the pipeline
 To run the pipeline, we need
@@ -33,11 +34,14 @@ To run the pipeline, we need
 `dada2 training set` (https://benjjneb.github.io/dada2/training.html)
 
 ## How to run
-- Create a project directory, e.g. `~/16S_QIIME2/test` and put the mapping file, e.g. `test_mapping_file.tsv` in the project directory. If you are running this on the cluster, the data would be staged in a scratch drive e.g. `/scr1/username`
+- Create a project directory and put the mapping file in it. If you are running this on the cluster, the project would be staged in a scratch drive e.g. `/scr1/users/username`. Normally the project is a clone of the `blank_16s` template, which has this pipeline as a submodule in `Scripts/HPC_cluster/16S_QIIME2`, e.g. `/scr1/users/danielsg/Henderson_Harmon_358`
 - Edit `qiime2_config.yml` so that it suits your project. In particular,
-  - **all: project**: path to the project directory, e.g. `~/16S_QIIME2/test`
-  - **all: mux_dir**: the direcotry containing multiplexed R1/R2 read pairs, e.g. `~/16S_QIIME2/test/multiplexed_fastq` 
-  - **all: mapping**: the name of mapping file, e.g. `test_mapping_file.tsv`
+  - **all: raw_data**: the run folder in `/mnt/isilon/microbiome/raw_data` (set by **all: raw_data_root**), e.g. `180103_M04734_0069_000000000-BGMCR_L001`. The first step of the pipeline copies every `*.fastq.gz` and `*.fasterq` in it to **mux_dir**, decompressing the `.fasterq` files to `.fastq.gz` with PetaGene's `petasuite`. Set to `""` if the multiplexed fastqs are already in **mux_dir**
+  - **all: project_dir**: full path to the project directory, e.g. `/home/username/16S_QIIME2/test`. If left blank (`""`), the pipeline uses the project it sits in, e.g. `/scr1/users/danielsg/Henderson_Harmon_358` when the pipeline is in `/scr1/users/danielsg/Henderson_Harmon_358/Scripts/HPC_cluster/16S_QIIME2`
+  - **all: mux_dir**: the directory (relative to **project_dir**) for the multiplexed R1/R2 read pairs, e.g. `Data/multiplexed_fastq`
+  - **all: data_dir**: the directory (relative to **project_dir**) where the pipeline output goes (`demultiplexed_fastq`, `demultiplexed_fastq_gz` and `QIIME_output`), default `Data`. Set to `""` to write them directly in **project_dir**. `manifest.csv` and the read count tables are written to **project_dir**
+  - **all: mapping**: the name of mapping file (relative to **project_dir**), e.g. `mapping_table.tsv`. If left blank (`""`), the `.tsv` file in the **raw_data** folder is copied to **project_dir** and used (there must be exactly one `.tsv` there)
+- To run on the included test data (no copying): set **raw_data** to `""`, **project_dir** to the full path of `16S_QIIME2/test`, **mux_dir** to `multiplexed_fastq`, **data_dir** to `""` and **mapping** to `test_mapping_file.tsv`
 - Edit `config.yaml` for platform specific settings (currently formatted for SLURM on republica)
 - (Optional) Edit `rules\targets\targets.rules` to comment out steps you don't need (e.g. `#TARGET_PICRUST2`)
 - To run the pipeline, activate the envrionment by entering `conda activate qiime2-2023.2`, `cd` into `16S_QIIME2` and execute `snakemake --profile ./`
@@ -45,6 +49,14 @@ To run the pipeline, we need
   - You can also do a dryrun: `./dryrun_snakemake.bash`
   
 ## Intermediate steps and corresponding input/output
+
+### Copying raw data
+#### Input
+- Multiplexed fastq.gz or PetaGene-compressed `.fasterq` files in `/mnt/isilon/microbiome/raw_data/<raw_data>`
+- Mapping file (`.tsv`) in the same folder, if **mapping** is left blank
+#### Output
+- fastq.gz files in `<project_dir>/Data/multiplexed_fastq` (copied, or decompressed from `.fasterq`)
+- Copy of the mapping file in `<project_dir>`
 
 ### Demultiplexing
 #### Input

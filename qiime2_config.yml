@@ -1,7 +1,19 @@
 all:
-    project_dir: "/scr1/users/path/to/project"
-    mux_dir: "multiplexed_fastq"
-    mapping: "mapping_table.tsv"
+    # Run folder in raw_data_root with the multiplexed fastq.gz or PetaGene .fasterq files, e.g. "180103_M04734_0069_000000000-BGMCR_L001"
+    # All *.fastq.gz and *.fasterq in it are copied to <project_dir>/<mux_dir> (.fasterq are decompressed to fastq.gz with petasuite)
+    # Set to "" to skip copying (fastqs already in mux_dir)
+    raw_data: "YYMMDD_MXXXXX_XXXX_000000000-XXXXX_L001"
+    raw_data_root: "/mnt/isilon/microbiome/raw_data"
+    # Full path to the project directory. If left blank (""), the pipeline uses the project it sits in,
+    # e.g. /scr1/users/danielsg/Henderson_Harmon_358 when the pipeline is in
+    # /scr1/users/danielsg/Henderson_Harmon_358/Scripts/HPC_cluster/16S_QIIME2
+    project_dir: ""
+    mux_dir: "Data/multiplexed_fastq" # relative to project_dir
+    # Where demultiplexed_fastq, demultiplexed_fastq_gz and QIIME_output go, relative to project_dir ("" for project_dir itself)
+    data_dir: "Data"
+    # Mapping file name, relative to project_dir. If left blank (""), the .tsv file in the raw_data
+    # folder is copied to project_dir and used (there must be exactly one .tsv there)
+    mapping: ""
 
 #try revcomp if you are getting 0 reads when demultiplexing
 demux:
